@@ -28,7 +28,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.5.x-dev"
+            "dev-master": "2.5.x-dev",
+	    "dev-v2.5.12-postgres10": "2.5.x-dev"
         }
     },
     "archive": {
