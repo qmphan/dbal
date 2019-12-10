@@ -60,7 +60,8 @@
     "extra": {
         "branch-alias": {
             "dev-master": "2.10.x-dev",
-            "dev-develop": "3.0.x-dev"
+            "dev-develop": "3.0.x-dev",
+            "dev-v2.10-postgres10": "2.10.x-dev"
         }
     }
 }

@@ -298,8 +298,15 @@ class PostgreSqlSchemaManager extends AbstractSchemaManager
         }
 
         if (! isset($sequence['increment_by'], $sequence['min_value'])) {
-            /** @var string[] $data */
-            $data = $this->_conn->fetchAssoc('SELECT min_value, increment_by FROM ' . $this->_platform->quoteIdentifier($sequenceName));
+            $version = floatval($this->_conn->getWrappedConnection()->getServerVersion());
+            if ($version >= 10) {
+               /** @var string[] $data */
+               $data = $this->_conn->fetchAssoc('SELECT min_value, increment_by FROM pg_sequences WHERE concat(schemaname, \'.\', sequencename) = ' . $this->_conn->quote($sequenceName));
+            }
+            else
+            {
+                $data = $this->_conn->fetchAssoc('SELECT min_value, increment_by FROM ' . $this->_platform->quoteIdentifier($sequenceName));
+            }
 
             $sequence += $data;
         }
